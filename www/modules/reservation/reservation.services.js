@@ -12,16 +12,16 @@ Reservation.service('ReservationDataService', [
   '$q',
   'Reservation',
   'SearchService',
-  'ProfileService',
-  function ($state, $q, Reservation, SearchService, ProfileService) {
+  'User',
+  function ($state, $q, Reservation, SearchService, User) {
 
     var svc = {};
 
     svc.getCurrentReservationReqModel = function () {
       if (window.localStorage && window.localStorage.getItem('currentReservationReqModel')) {
         var resReqObj = JSON.parse(window.localStorage.getItem('currentReservationReqModel'));
-        if (ProfileService.getCurrentUserId()) {
-          resReqObj.userId = ProfileService.getCurrentUserId();
+        if (User.isAuthenticated()) {
+          resReqObj.userId = User.getCurrentId();
         }
         return resReqObj;
       }
@@ -97,7 +97,7 @@ Reservation.service('ReservationDataService', [
 
     svc.getMyReservations = function () {
 
-      var customerId = ProfileService.getCurrentUserId();
+      var customerId = User.getCurrentId();
 
       var filter = {
         'filter[where][customerId]': customerId,

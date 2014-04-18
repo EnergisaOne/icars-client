@@ -42,12 +42,12 @@ Profile.directive('lbLogout', [
   function (User) {
     return{
       template: '<button class="button button-full button-outline" ng-click="logout()" ng-show="isUserAuth()">logout</button>',
-      controller: function ($scope, User, ProfileService) {
+      controller: function ($scope, User) {
         $scope.logout = function () {
-          ProfileService.logCurrentUserOut();
+          User.logout();
         };
         $scope.isUserAuth = function () {
-          return ProfileService.getCurrentUserId();
+          return User.isAuthenticated();
         };
       },
       replace: true

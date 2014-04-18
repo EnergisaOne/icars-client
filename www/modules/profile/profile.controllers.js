@@ -14,15 +14,15 @@
  * */
 Profile.controller('ProfileController', [
   '$rootScope',
-  'ProfileService',
+  'User',
   '$scope',
   'User',
-  function ($rootScope, ProfileService, $scope, User) {
+  function ($rootScope, User, $scope, User) {
 
     $scope.viewTitle = 'Profile';
 
     $scope.showMyReservations = function () {
-      if (ProfileService.getCurrentUserId()) {
+      if (User.isAuthenticated()) {
         return true;
       }
       return false;

@@ -215,9 +215,9 @@ Dealer.controller('DealerDetailController', [
   'ReservationDataService',
   'RestService',
   'SearchService',
-  'ProfileService',
+  'User',
   'UIService',
-  function ($scope, $state, $stateParams, $http, $templateCache, DealerService, ReservationDataService, RestService, SearchService, ProfileService, UIService) {
+  function ($scope, $state, $stateParams, $http, $templateCache, DealerService, ReservationDataService, RestService, SearchService, User, UIService) {
     /*
      * Load Dealer Detail
      * */
@@ -291,7 +291,7 @@ Dealer.controller('DealerDetailController', [
 
         // determine if user is logged in or not and redirect if not
 
-        if (ProfileService.getCurrentUserId()) {
+        if (User.isAuthenticated()) {
           $state.go('reservation');
         }
         else {

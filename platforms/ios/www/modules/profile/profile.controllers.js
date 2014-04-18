@@ -14,22 +14,21 @@
  * */
 Profile.controller('ProfileController', [
   '$rootScope',
-  'ProfileService',
   '$scope',
   'User',
-  function ($rootScope, ProfileService, $scope, User) {
+  function ($rootScope, $scope, User) {
 
     $scope.viewTitle = 'Profile';
 
     $scope.showMyReservations = function () {
-      if (ProfileService.getCurrentUserId()) {
+      if (User.isAuthenticated()) {
         return true;
       }
       return false;
     };
     $scope.showReceiveNotifications = function(){
       var pushNotificationsEnabled = true;
-//      if (ProfileService.getCurrentUserId()) {
+//      if (User.isAuthenticated())) {
 //        return true;
 //      }
       return pushNotificationsEnabled;

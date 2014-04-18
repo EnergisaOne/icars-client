@@ -15,16 +15,16 @@
 Home.controller('HomeController', [
   '$scope',
   '$state',
-  'ProfileService',
+  'User',
   'Installation',
-  function ($scope, $state, ProfileService, Installation) {
+  function ($scope, $state, User, Installation) {
 
 
     if(window.localStorage.getItem('APNKey') && (!JSON.parse(window.localStorage.getItem('pnRegistered')))){
       // post app initialization key to server
       Installation.create({
           appId: '1',
-          userId: ProfileService.getCurrentUserId() || '',
+          userId: User.getCurrentUserId || '',
           deviceToken: window.localStorage.getItem('APNKey'),
           deviceType: 'ios',
           created: new Date(),
@@ -46,20 +46,20 @@ Home.controller('HomeController', [
     $scope.viewTitle = 'iCars';
 
     $scope.showMyReservations = function () {
-      if (ProfileService.getCurrentUserId()) {
+      if (User.isAuthenticated()) {
         return true;
       }
       return false;
     };
     $scope.showLogin = function () {
-      if (ProfileService.getCurrentUserId()) {
+      if (User.isAuthenticated()) {
         return false;
       }
       return true;
 
     };
     $scope.showRegister = function () {
-      if (ProfileService.getCurrentUserId()) {
+      if (User.isAuthenticated()) {
         return false;
       }
       return true;
